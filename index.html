@@ -6,12 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diminished Resolutions</title>
     <style>
-        body {
-            margin: 0;
+        whole {
+            margin: auto;
+            margin-top: -20px;
             padding: 20px;
+            background: transparent;
+            display: grid;
+            grid-template-rows: auto auto;
+            grid-row-gap: 10px;
+            justify-content: center;
+            align-items: center;
+            min-height: 10vh;
+        }
+        description {
+            margin: auto;
+            margin-top: -306px;
             background: #1a1a1a;
             display: flex;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Helvetica, sans-serif;
+        }
+        #dcontainer {
+            width: 680px;
+            height: 160px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        #dtextcontainer{
+            margin: 12px;
+            margin-top: 6px;
+            border: 60px;
+            position: absolute;
+            color: white;
+            z-index: 10;
+        }
+        .dtext {
+            top: 32px;
+            color: white;
+            margin-bottom: 5px;
+        }
+        body {
+            margin: auto;
+            padding: 20px;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: left;
             align-items: center;
             min-height: 100vh;
             font-family: Helvetica, sans-serif;
@@ -63,16 +107,17 @@
         }
         #main-content {
             width: 680px;
-            height: 500px;
+            height: 460px;
             position: relative;
-            margin-top: 32px;
+            margin-top: 22px;
+            margin-bottom: 10px;
         }
         
         /* Label text */
         #label-container {
             position: absolute;
             left: 0;
-            top: 440px;
+            top: 430px;
             width: 680px;
             height: 60px;
         }
@@ -231,226 +276,173 @@
         }
     </style>
 </head>
-<body>
-    <div id="container">
-        <div id="title-container">
-            <div id="main-title">Diminished Resolutions</div>
-            <div id="subtitle">by CircusHarmonic</div>
-        </div>
-        <div id="dropdown-container">
-            <select id="dropdown">
-                <option value="0">Diminished → Resolution</option>
-                <option value="1">Resolution → Diminished</option>
-            </select>
-        </div>
-        <div id="main-content">
-            <div id="circle-container">
-                <div id="center-text"></div>
+<whole>
+    <body>
+        <div id="container">
+            <div id="title-container">
+                <div id="main-title">Diminished Resolutions</div>
+                <div id="subtitle">by CircusHarmonic</div>
             </div>
-            <div id="chart-container">
-                <svg id="svg-lines"></svg>
+            <div id="dropdown-container">
+                <select id="dropdown">
+                    <option value="0">Diminished → Resolution</option>
+                    <option value="1">Resolution → Diminished</option>
+                </select>
             </div>
-            <div id="label-container">
-                <span id="left-label" class="label-text">Diminished</span>
-                <span id="arrow" class="arrow">
-                    <svg viewBox="0 0 180 36" xmlns="http://www.w3.org/2000/svg">
-                        <line x1="9" y1="13" x2="157.5" y2="13" stroke="white" stroke-width="2.7"/>
-                        <polygon points="171,13 153,5.8 153,20.2" fill="white"/>
-                    </svg>
-                </span>
-                <span id="right-label" class="label-text">Resolution</span>
+            <div id="main-content">
+                <div id="circle-container">
+                    <div id="center-text"></div>
+                </div>
+                <div id="chart-container">
+                    <svg id="svg-lines"></svg>
+                </div>
+                <div id="label-container">
+                    <span id="left-label" class="label-text">Diminished</span>
+                    <span id="arrow" class="arrow">
+                        <svg viewBox="0 0 180 36" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="9" y1="13" x2="157.5" y2="13" stroke="white" stroke-width="2.7"/>
+                            <polygon points="171,13 153,5.8 153,20.2" fill="white"/>
+                        </svg>
+                    </span>
+                    <span id="right-label" class="label-text">Resolution</span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        // ========================================
-        // MODE CONFIGURATIONS
-        // ========================================
-        const MODE_CONFIG = {
-            0: { // Diminished -> Resolution
-                numLeftBoxes: 4,
-                numRightBoxes: 6,
-                leftBoxWidth: 80,
-                leftBoxClass: 'narrow',
-                rightBoxWidth: 220,
-                rightBoxClass: 'wide',
-                circleActiveClass: 'red',
-                rightBoxColorClass: 'green',
-                leftLabel: 'Diminished',
-                rightLabel: 'Resolution',
-                centerText: '°7 Pivot Chord',
-                leftBoxX: 45,
-                curvature: 26,
-                arrowSVG: `
-                    <svg viewBox="0 0 180 36" xmlns="http://www.w3.org/2000/svg">
-                        <line x1="9" y1="13" x2="157.5" y2="13" stroke="white" stroke-width="2.7"/>
-                        <polygon points="171,13 153,5.8 153,20.2" fill="white"/>
-                    </svg>
-                `
-            },
-            1: { // Resolution -> Diminished
-                numLeftBoxes: 6,
-                numRightBoxes: 4,
-                leftBoxWidth: 220,
-                leftBoxClass: 'wide',
-                rightBoxWidth: 80,
-                rightBoxClass: 'narrow',
-                circleActiveClass: 'green',
-                rightBoxColorClass: 'red',
-                leftLabel: 'Resolution',
-                rightLabel: 'Diminished',
-                centerText: 'Resolution Key',
-                leftBoxX: 65,
-                curvature: 20,
-                arrowSVG: `
-                    <svg viewBox="0 0 180 36" xmlns="http://www.w3.org/2000/svg">
-                        <line x1="22.5" y1="13" x2="171" y2="13" stroke="white" stroke-width="2.7"/>
-                        <polygon points="9,13 27,5.8 27,20.2" fill="white"/>
-                    </svg>
-                `
-            }
-        };
-
-        // ========================================
-        // GLOBAL VARIABLES
-        // ========================================
-        const notes = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Db', 'Ab', 'Eb', 'Bb', 'F'];
-        let activeNote = 0;
-        let rotationOffset = 0;
-        let targetRotation = 0;
-        let animating = false;
-        const animationSpeed = 0.12;
-        let activeLeftBox = 0;
-        let dropdownMode = 0; // 0 = Diminished->Resolution, 1 = Resolution->Diminished
-
-        // Box quantity variables
-        let numLeftBoxes = 4;
-        let numRightBoxes = 6;
-
-        const circleContainer = document.getElementById('circle-container');
-        const chartContainer = document.getElementById('chart-container');
-        const svgLines = document.getElementById('svg-lines');
-
-        const centerX = 120;
-        const centerY = 200;
-        const outerRadius = 93.6;
-        const boxHeight = 36;
-        const spacing = 20;
-        
-        let centerText = '°7 Pivot Chord';
-        const centerTextElement = document.getElementById('center-text');
-        // ========================================
-        // BOX DATA
-        // ========================================
-
-
-        let domlist = [
-            { label: "B7" },
-            { label: "D7" },
-            { label: "F7" },
-            { label: "Ab7" }
-        ];
-
-        let reslist = [
-            { label: "E (Perfect)" },
-            { label: "Db (Back Door)" },
-            { label: "C (Screen Door)" },
-            { label: "Bb (Tritone Perfect)" },
-            { label: "G (Tritone Back Door)" },
-            { label: "F# (Tritone Screen Door / Plagal)" }
-        ];
-
-        let dimlist = [
-            { label: "Ab°7" },
-            { label: "F°7" },
-            { label: "D°7" },
-            { label: "B°7" }
-        ];
-
-        let dompivotlist = [
-            { label: "G (Perfect)" },
-            { label: "Bb (Back Door)" },
-            { label: "B (Screen Door)" },
-            { label: "Db (Tritone Perfect)" },
-            { label: "E (Tritone Back Door)" },
-            { label: "F (Tritone Screen Door / Plagal)" }
-        ];
-
-        let leftBoxes = domlist;
-        let rightBoxes = reslist;
-
-        // ========================================
-        // NOTE CIRCLE CREATION
-        // ========================================
-        const noteElements = [];
-        notes.forEach((note, i) => {
-            const el = document.createElement('div');
-            el.className = 'note-circle';
-            el.textContent = note;
-            el.dataset.index = i;
-            circleContainer.appendChild(el);
-            noteElements.push(el);
-            
-            el.addEventListener('click', () => {
-                activeNote = i;
-                targetRotation = i * 30;
-                animating = true;
-
-                switch (dropdownMode) {
-                    case 0:
-                        calculatedoms(activeNote);
-                        dom7labels(dom1, dom2, dom3, dom4);
-                        calculateresolutions(activeLeftBox);
-                        resolutionlabels(res1, res2, res3, res4, res5, res6);
-                        break;
-                    case 1:
-                        calculatepivots(activeNote);
-                        resolutionlabels(piv1, piv2, piv3, piv4, piv5, piv6);
-                        calculatedims(activeLeftBox);
-                        dim7labels(dim1, dim2, dim3, dim4);
-                        break;
+        <script>
+            // ========================================
+            // MODE CONFIGURATIONS
+            // ========================================
+            const MODE_CONFIG = {
+                0: { // Diminished -> Resolution
+                    numLeftBoxes: 4,
+                    numRightBoxes: 6,
+                    leftBoxWidth: 80,
+                    leftBoxClass: 'narrow',
+                    rightBoxWidth: 220,
+                    rightBoxClass: 'wide',
+                    circleActiveClass: 'red',
+                    rightBoxColorClass: 'green',
+                    leftLabel: 'Diminished',
+                    rightLabel: 'Resolution',
+                    centerText: '°7 Pivot Chord',
+                    leftBoxX: 45,
+                    curvature: 26,
+                    arrowSVG: `
+                        <svg viewBox="0 0 180 36" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="9" y1="13" x2="157.5" y2="13" stroke="white" stroke-width="2.7"/>
+                            <polygon points="171,13 153,5.8 153,20.2" fill="white"/>
+                        </svg>
+                    `
+                },
+                1: { // Resolution -> Diminished
+                    numLeftBoxes: 6,
+                    numRightBoxes: 4,
+                    leftBoxWidth: 220,
+                    leftBoxClass: 'wide',
+                    rightBoxWidth: 80,
+                    rightBoxClass: 'narrow',
+                    circleActiveClass: 'green',
+                    rightBoxColorClass: 'red',
+                    leftLabel: 'Resolution',
+                    rightLabel: 'Diminished',
+                    centerText: 'Resolution Key',
+                    leftBoxX: 65,
+                    curvature: 20,
+                    arrowSVG: `
+                        <svg viewBox="0 0 180 36" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="22.5" y1="13" x2="171" y2="13" stroke="white" stroke-width="2.7"/>
+                            <polygon points="9,13 27,5.8 27,20.2" fill="white"/>
+                        </svg>
+                    `
                 }
-                updateLeftBoxes();
-                updateRightBoxes();
-                updateActiveStates();
-                animate();
-            });
-        });
+            };
 
-        // ========================================
-        // BOX CREATION AND MANAGEMENT
-        // ========================================
-        let leftBoxElements = [];
-        let rightBoxElements = [];
-        
-        function createBoxes() {
-            const config = MODE_CONFIG[dropdownMode];
+            // ========================================
+            // GLOBAL VARIABLES
+            // ========================================
+            const notes = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Db', 'Ab', 'Eb', 'Bb', 'F'];
+            let activeNote = 0;
+            let rotationOffset = 0;
+            let targetRotation = 0;
+            let animating = false;
+            const animationSpeed = 0.12;
+            let activeLeftBox = 0;
+            let dropdownMode = 0; // 0 = Diminished->Resolution, 1 = Resolution->Diminished
+
+            // Box quantity variables
+            let numLeftBoxes = 4;
+            let numRightBoxes = 6;
+
+            const circleContainer = document.getElementById('circle-container');
+            const chartContainer = document.getElementById('chart-container');
+            const svgLines = document.getElementById('svg-lines');
+
+            const centerX = 120;
+            const centerY = 200;
+            const outerRadius = 93.6;
+            const boxHeight = 36;
+            const spacing = 20;
             
-            // Clear existing boxes
-            leftBoxElements.forEach(el => el.remove());
-            rightBoxElements.forEach(el => el.remove());
-            leftBoxElements = [];
-            rightBoxElements = [];
-            
-            const totalHeightleft = (numLeftBoxes * boxHeight) + ((numLeftBoxes - 1) * spacing);
-            const startYleft = (400 - totalHeightleft) / 2;
-            const leftBoxX = config.leftBoxX;
-            
-            // Create left boxes
-            for (let i = 0; i < numLeftBoxes; i++) {
+            let centerText = '°7 Pivot Chord';
+            const centerTextElement = document.getElementById('center-text');
+            // ========================================
+            // BOX DATA
+            // ========================================
+
+
+            let domlist = [
+                { label: "B7" },
+                { label: "D7" },
+                { label: "F7" },
+                { label: "Ab7" }
+            ];
+
+            let reslist = [
+                { label: "E (Perfect)" },
+                { label: "Db (Back Door)" },
+                { label: "C (Screen Door)" },
+                { label: "Bb (Tritone Perfect)" },
+                { label: "G (Tritone Back Door)" },
+                { label: "F# (Tritone Screen Door / Plagal)" }
+            ];
+
+            let dimlist = [
+                { label: "Ab°7" },
+                { label: "F°7" },
+                { label: "D°7" },
+                { label: "B°7" }
+            ];
+
+            let dompivotlist = [
+                { label: "G (Perfect)" },
+                { label: "Bb (Back Door)" },
+                { label: "B (Screen Door)" },
+                { label: "Db (Tritone Perfect)" },
+                { label: "E (Tritone Back Door)" },
+                { label: "F (Tritone Screen Door / Plagal)" }
+            ];
+
+            let leftBoxes = domlist;
+            let rightBoxes = reslist;
+
+            // ========================================
+            // NOTE CIRCLE CREATION
+            // ========================================
+            const noteElements = [];
+            notes.forEach((note, i) => {
                 const el = document.createElement('div');
-                el.className = 'left-box';
-                el.classList.add(config.leftBoxClass);
-                el.textContent = leftBoxes[i] ? leftBoxes[i].label : '';
+                el.className = 'note-circle';
+                el.textContent = note;
                 el.dataset.index = i;
-                el.style.left = leftBoxX + 'px';
-                el.style.top = (startYleft + (i * (boxHeight + spacing))) + 'px';
-                chartContainer.appendChild(el);
-                leftBoxElements.push(el);
+                circleContainer.appendChild(el);
+                noteElements.push(el);
                 
                 el.addEventListener('click', () => {
-                    activeLeftBox = i;
+                    activeNote = i;
+                    targetRotation = i * 30;
+                    animating = true;
+
                     switch (dropdownMode) {
                         case 0:
                             calculatedoms(activeNote);
@@ -468,332 +460,398 @@
                     updateLeftBoxes();
                     updateRightBoxes();
                     updateActiveStates();
-                    drawLines();
+                    animate();
+                });
+            });
+
+            // ========================================
+            // BOX CREATION AND MANAGEMENT
+            // ========================================
+            let leftBoxElements = [];
+            let rightBoxElements = [];
+            
+            function createBoxes() {
+                const config = MODE_CONFIG[dropdownMode];
+                
+                // Clear existing boxes
+                leftBoxElements.forEach(el => el.remove());
+                rightBoxElements.forEach(el => el.remove());
+                leftBoxElements = [];
+                rightBoxElements = [];
+                
+                const totalHeightleft = (numLeftBoxes * boxHeight) + ((numLeftBoxes - 1) * spacing);
+                const startYleft = (400 - totalHeightleft) / 2;
+                const leftBoxX = config.leftBoxX;
+                
+                // Create left boxes
+                for (let i = 0; i < numLeftBoxes; i++) {
+                    const el = document.createElement('div');
+                    el.className = 'left-box';
+                    el.classList.add(config.leftBoxClass);
+                    el.textContent = leftBoxes[i] ? leftBoxes[i].label : '';
+                    el.dataset.index = i;
+                    el.style.left = leftBoxX + 'px';
+                    el.style.top = (startYleft + (i * (boxHeight + spacing))) + 'px';
+                    chartContainer.appendChild(el);
+                    leftBoxElements.push(el);
+                    
+                    el.addEventListener('click', () => {
+                        activeLeftBox = i;
+                        switch (dropdownMode) {
+                            case 0:
+                                calculatedoms(activeNote);
+                                dom7labels(dom1, dom2, dom3, dom4);
+                                calculateresolutions(activeLeftBox);
+                                resolutionlabels(res1, res2, res3, res4, res5, res6);
+                                break;
+                            case 1:
+                                calculatepivots(activeNote);
+                                resolutionlabels(piv1, piv2, piv3, piv4, piv5, piv6);
+                                calculatedims(activeLeftBox);
+                                dim7labels(dim1, dim2, dim3, dim4);
+                                break;
+                        }
+                        updateLeftBoxes();
+                        updateRightBoxes();
+                        updateActiveStates();
+                        drawLines();
+                    });
+                }
+                
+                // Create right boxes - always aligned with circle center
+                const totalHeightright = (numRightBoxes * boxHeight) + ((numRightBoxes - 1) * spacing);
+                const startYright = (400 - totalHeightright) / 2;
+                // Adjust rightBoxX to extend left when narrow
+                const rightBoxX = dropdownMode === 0 ? leftBoxX + config.leftBoxWidth + 80 : leftBoxX + config.leftBoxWidth + 100 - 40;
+                
+                for (let i = 0; i < numRightBoxes; i++) {
+                    const el = document.createElement('div');
+                    el.className = 'right-box';
+                    el.classList.add(config.rightBoxClass);
+                    el.textContent = rightBoxes[i] ? rightBoxes[i].label : '';
+                    el.style.left = rightBoxX + 'px';
+                    el.style.top = (startYright + (i * (boxHeight + spacing))) + 'px';
+                    chartContainer.appendChild(el);
+                    rightBoxElements.push(el);
+                }
+                
+                updateRightBoxColors();
+            }
+
+            // ========================================
+            // MUSIC THEORY CALCULATIONS
+            // ========================================
+            let dom1 = '', dom2 = '', dom3 = '', dom4 = '';
+            let res1 = '', res2 = '', res3 = '', res4 = '', res5 = '', res6 = '';
+            let piv1 = '', piv2 = '', piv3 = '', piv4 = '', piv5 = '', piv6 = '';
+            let dim1 = '', dim2 = '', dim3 = '', dim4 = '';
+
+            function rotateleft(list, k) {
+                const n = list.length;
+                k = list.length - k;
+                k %= n;
+                const rotated = [];
+                for (let i = 0; i < n; i++) {
+                    rotated[(i + k) % n] = list[i];
+                }
+                return rotated;
+            }
+
+            function calculatedoms(i) {
+                let rotated5ths = rotateleft(notes, i);
+                dom1 = rotated5ths[5];
+                dom2 = rotated5ths[2];
+                dom3 = rotated5ths[11];
+                dom4 = rotated5ths[8];
+            }
+
+            function calculateresolutions(i) {
+                const resolutionmap = [5, 2, 11, 8];
+                let rotated5ths = rotateleft(notes, activeNote);
+                let doublerotated5ths = rotateleft(rotated5ths, resolutionmap[i]);
+                res1 = doublerotated5ths[11];
+                res2 = doublerotated5ths[2];
+                res3 = doublerotated5ths[7];
+                res4 = doublerotated5ths[5];
+                res5 = doublerotated5ths[8];
+                res6 = doublerotated5ths[1];
+            }
+
+            function calculatepivots(i) {
+                let rotated5ths = rotateleft(notes, i);
+                piv1 = rotated5ths[1];
+                piv2 = rotated5ths[10];
+                piv3 = rotated5ths[5];
+                piv4 = rotated5ths[7];
+                piv5 = rotated5ths[4];
+                piv6 = rotated5ths[11];
+            }
+
+            function calculatedims(i) {
+                const resolutionmap = [1, 10, 5, 7, 4, 11];
+                let rotated5ths = rotateleft(notes, activeNote);
+                let doublerotated5ths = rotateleft(rotated5ths, resolutionmap[i]);
+                dim1 = doublerotated5ths[7];
+                dim2 = doublerotated5ths[10];
+                dim3 = doublerotated5ths[1];
+                dim4 = doublerotated5ths[4];
+            }
+
+            function dim7labels(i1, i2, i3, i4) {
+                dimlist = [
+                    { label: i1 + "°7" },
+                    { label: i2 + "°7" },
+                    { label: i3 + "°7" },
+                    { label: i4 + "°7" }
+                ];
+                rightBoxes = dimlist;
+            }
+
+            function dom7labels(i1, i2, i3, i4) {
+                domlist = [
+                    { label: i1 + "7" },
+                    { label: i2 + "7" },
+                    { label: i3 + "7" },
+                    { label: i4 + "7" }
+                ];
+                leftBoxes = domlist;
+            }
+
+            function resolutionlabels(i1, i2, i3, i4, i5, i6) {
+                switch (dropdownMode) {
+                    case 0:
+                        reslist = [
+                            { label: " " + i1 + " (Perfect)" },
+                            { label: " " + i2 + " (Back Door)" },
+                            { label: " " + i3 + " (Screen Door)" },
+                            { label: " " + i4 + " (Tritone Perfect)" },
+                            { label: " " + i5 + " (Tritone Back Door)" },
+                            { label: " " + i6 + " (Tritone Screen Door / Plagal)" }
+                        ];
+                        rightBoxes = reslist;
+                        break;
+                    case 1:
+                        dompivotlist = [
+                            { label: " " + i1 + " (Perfect)" },
+                            { label: " " + i2 + " (Back Door)" },
+                            { label: " " + i3 + " (Screen Door)" },
+                            { label: " " + i4 + " (Tritone Perfect)" },
+                            { label: " " + i5 + " (Tritone Back Door)" },
+                            { label: " " + i6 + " (Tritone Screen Door / Plagal)" }
+                        ];
+                        leftBoxes = dompivotlist;
+                        break;
+                }
+            }
+
+            function updateCenterText() {
+                centerTextElement.textContent = centerText;
+            }
+
+            function updateNotePositions() {
+                noteElements.forEach((el, i) => {
+                    const angle = (i * 30 - rotationOffset) * Math.PI / 180;
+                    const x = centerX + Math.cos(angle) * outerRadius;
+                    const y = centerY + Math.sin(angle) * outerRadius;
+                    el.style.left = x + 'px';
+                    el.style.top = y + 'px';
+                });
+            }
+
+            function updateActiveStates() {
+                const config = MODE_CONFIG[dropdownMode];
+                noteElements.forEach((el, i) => {
+                    el.classList.remove('active', 'red', 'green');
+                    if (i === activeNote) {
+                        el.classList.add('active');
+                        el.classList.add(config.circleActiveClass);
+                    }
+                });
+                leftBoxElements.forEach((el, i) => {
+                    el.classList.toggle('active', i === activeLeftBox);
+                });
+            }
+
+            function updateRightBoxColors() {
+                const config = MODE_CONFIG[dropdownMode];
+                rightBoxElements.forEach(el => {
+                    el.classList.remove('green', 'red');
+                    el.classList.add(config.rightBoxColorClass);
+                });
+            }
+
+            function updateLeftBoxes() {
+                switch (dropdownMode) {
+                    case 0:
+                        leftBoxes = domlist;
+                        break;
+                    case 1:
+                        leftBoxes = dompivotlist;
+                        break;
+                    }
+                leftBoxElements.forEach((el, i) => {
+                    el.textContent = leftBoxes[i] ? leftBoxes[i].label : '';
+                });
+            }
+
+            function updateRightBoxes() {
+                switch (dropdownMode) {
+                    case 0:
+                        rightBoxes = reslist;
+                        break;
+                    case 1:
+                        rightBoxes = dimlist;
+                        break;
+                    }
+                rightBoxElements.forEach((el, i) => {
+                    el.textContent = rightBoxes[i] ? rightBoxes[i].label : '';
                 });
             }
             
-            // Create right boxes - always aligned with circle center
-            const totalHeightright = (numRightBoxes * boxHeight) + ((numRightBoxes - 1) * spacing);
-            const startYright = (400 - totalHeightright) / 2;
-            // Adjust rightBoxX to extend left when narrow
-            const rightBoxX = dropdownMode === 0 ? leftBoxX + config.leftBoxWidth + 80 : leftBoxX + config.leftBoxWidth + 100 - 40;
+            function drawLines() {
+                const config = MODE_CONFIG[dropdownMode];
+                const convergencePointX = 5;
+                const convergenceY = 200;
+              
+                let paths = '';
             
-            for (let i = 0; i < numRightBoxes; i++) {
-                const el = document.createElement('div');
-                el.className = 'right-box';
-                el.classList.add(config.rightBoxClass);
-                el.textContent = rightBoxes[i] ? rightBoxes[i].label : '';
-                el.style.left = rightBoxX + 'px';
-                el.style.top = (startYright + (i * (boxHeight + spacing))) + 'px';
-                chartContainer.appendChild(el);
-                rightBoxElements.push(el);
-            }
+                const totalHeightleft = (numLeftBoxes * boxHeight) + ((numLeftBoxes - 1) * spacing);
+                const startYleft = (400 - totalHeightleft) / 2;
+                const leftBoxX = config.leftBoxX;
             
-            updateRightBoxColors();
-        }
-
-        // ========================================
-        // MUSIC THEORY CALCULATIONS
-        // ========================================
-        let dom1 = '', dom2 = '', dom3 = '', dom4 = '';
-        let res1 = '', res2 = '', res3 = '', res4 = '', res5 = '', res6 = '';
-        let piv1 = '', piv2 = '', piv3 = '', piv4 = '', piv5 = '', piv6 = '';
-        let dim1 = '', dim2 = '', dim3 = '', dim4 = '';
-
-        function rotateleft(list, k) {
-            const n = list.length;
-            k = list.length - k;
-            k %= n;
-            const rotated = [];
-            for (let i = 0; i < n; i++) {
-                rotated[(i + k) % n] = list[i];
-            }
-            return rotated;
-        }
-
-        function calculatedoms(i) {
-            let rotated5ths = rotateleft(notes, i);
-            dom1 = rotated5ths[5];
-            dom2 = rotated5ths[2];
-            dom3 = rotated5ths[11];
-            dom4 = rotated5ths[8];
-        }
-
-        function calculateresolutions(i) {
-            const resolutionmap = [5, 2, 11, 8];
-            let rotated5ths = rotateleft(notes, activeNote);
-            let doublerotated5ths = rotateleft(rotated5ths, resolutionmap[i]);
-            res1 = doublerotated5ths[11];
-            res2 = doublerotated5ths[2];
-            res3 = doublerotated5ths[7];
-            res4 = doublerotated5ths[5];
-            res5 = doublerotated5ths[8];
-            res6 = doublerotated5ths[1];
-        }
-
-        function calculatepivots(i) {
-            let rotated5ths = rotateleft(notes, i);
-            piv1 = rotated5ths[1];
-            piv2 = rotated5ths[10];
-            piv3 = rotated5ths[5];
-            piv4 = rotated5ths[7];
-            piv5 = rotated5ths[4];
-            piv6 = rotated5ths[11];
-        }
-
-        function calculatedims(i) {
-            const resolutionmap = [1, 10, 5, 7, 4, 11];
-            let rotated5ths = rotateleft(notes, activeNote);
-            let doublerotated5ths = rotateleft(rotated5ths, resolutionmap[i]);
-            dim1 = doublerotated5ths[7];
-            dim2 = doublerotated5ths[10];
-            dim3 = doublerotated5ths[1];
-            dim4 = doublerotated5ths[4];
-        }
-
-        function dim7labels(i1, i2, i3, i4) {
-            dimlist = [
-                { label: i1 + "°7" },
-                { label: i2 + "°7" },
-                { label: i3 + "°7" },
-                { label: i4 + "°7" }
-            ];
-            rightBoxes = dimlist;
-        }
-
-        function dom7labels(i1, i2, i3, i4) {
-            domlist = [
-                { label: i1 + "7" },
-                { label: i2 + "7" },
-                { label: i3 + "7" },
-                { label: i4 + "7" }
-            ];
-            leftBoxes = domlist;
-        }
-
-        function resolutionlabels(i1, i2, i3, i4, i5, i6) {
-            switch (dropdownMode) {
-                case 0:
-                    reslist = [
-                        { label: " " + i1 + " (Perfect)" },
-                        { label: " " + i2 + " (Back Door)" },
-                        { label: " " + i3 + " (Screen Door)" },
-                        { label: " " + i4 + " (Tritone Perfect)" },
-                        { label: " " + i5 + " (Tritone Back Door)" },
-                        { label: " " + i6 + " (Tritone Screen Door / Plagal)" }
-                    ];
-                    rightBoxes = reslist;
-                    break;
-                case 1:
-                    dompivotlist = [
-                        { label: " " + i1 + " (Perfect)" },
-                        { label: " " + i2 + " (Back Door)" },
-                        { label: " " + i3 + " (Screen Door)" },
-                        { label: " " + i4 + " (Tritone Perfect)" },
-                        { label: " " + i5 + " (Tritone Back Door)" },
-                        { label: " " + i6 + " (Tritone Screen Door / Plagal)" }
-                    ];
-                    leftBoxes = dompivotlist;
-                    break;
-            }
-        }
-
-        function updateCenterText() {
-            centerTextElement.textContent = centerText;
-        }
-
-        function updateNotePositions() {
-            noteElements.forEach((el, i) => {
-                const angle = (i * 30 - rotationOffset) * Math.PI / 180;
-                const x = centerX + Math.cos(angle) * outerRadius;
-                const y = centerY + Math.sin(angle) * outerRadius;
-                el.style.left = x + 'px';
-                el.style.top = y + 'px';
-            });
-        }
-
-        function updateActiveStates() {
-            const config = MODE_CONFIG[dropdownMode];
-            noteElements.forEach((el, i) => {
-                el.classList.remove('active', 'red', 'green');
-                if (i === activeNote) {
-                    el.classList.add('active');
-                    el.classList.add(config.circleActiveClass);
-                }
-            });
-            leftBoxElements.forEach((el, i) => {
-                el.classList.toggle('active', i === activeLeftBox);
-            });
-        }
-
-        function updateRightBoxColors() {
-            const config = MODE_CONFIG[dropdownMode];
-            rightBoxElements.forEach(el => {
-                el.classList.remove('green', 'red');
-                el.classList.add(config.rightBoxColorClass);
-            });
-        }
-
-        function updateLeftBoxes() {
-            switch (dropdownMode) {
-                case 0:
-                    leftBoxes = domlist;
-                    break;
-                case 1:
-                    leftBoxes = dompivotlist;
-                    break;
-                }
-            leftBoxElements.forEach((el, i) => {
-                el.textContent = leftBoxes[i] ? leftBoxes[i].label : '';
-            });
-        }
-
-        function updateRightBoxes() {
-            switch (dropdownMode) {
-                case 0:
-                    rightBoxes = reslist;
-                    break;
-                case 1:
-                    rightBoxes = dimlist;
-                    break;
-                }
-            rightBoxElements.forEach((el, i) => {
-                el.textContent = rightBoxes[i] ? rightBoxes[i].label : '';
-            });
-        }
-        
-        function drawLines() {
-            const config = MODE_CONFIG[dropdownMode];
-            const convergencePointX = 5;
-            const convergenceY = 200;
-          
-            let paths = '';
-        
-            const totalHeightleft = (numLeftBoxes * boxHeight) + ((numLeftBoxes - 1) * spacing);
-            const startYleft = (400 - totalHeightleft) / 2;
-            const leftBoxX = config.leftBoxX;
-        
-            const leftBoxWidth = config.leftBoxWidth;
-            const rightBoxX = dropdownMode === 0 ? leftBoxX + leftBoxWidth + 80 : leftBoxX + leftBoxWidth + 100 - 40;
-        
-            const totalHeightright = (numRightBoxes * boxHeight) + ((numRightBoxes - 1) * spacing);
-            const startYright = (400 - totalHeightright) / 2;
+                const leftBoxWidth = config.leftBoxWidth;
+                const rightBoxX = dropdownMode === 0 ? leftBoxX + leftBoxWidth + 80 : leftBoxX + leftBoxWidth + 100 - 40;
             
-            // Get curvature from config
-            const curvature = config.curvature;
-            
-            // Left lines
-            for (let i = 0; i < numLeftBoxes; i++) {
-                const boxY = startYleft + (i * (boxHeight + spacing));
-                const boxCenterY = boxY + boxHeight / 2;
-                const controlX1 = convergencePointX + curvature;
-                const controlX2 = leftBoxX - curvature;
+                const totalHeightright = (numRightBoxes * boxHeight) + ((numRightBoxes - 1) * spacing);
+                const startYright = (400 - totalHeightright) / 2;
                 
-                paths += `<path d="M ${convergencePointX} ${convergenceY} C ${controlX1} ${convergenceY}, ${controlX2} ${boxCenterY}, ${leftBoxX} ${boxCenterY}" stroke="rgba(255, 255, 255, 1)" stroke-width="2" fill="none"/>`;
-                }
-            
-            // Right lines
-            const activeBoxY = startYleft + (activeLeftBox * (boxHeight + spacing));
-            const activeBoxCenterY = activeBoxY + boxHeight / 2;
-            const activeBoxRightX = leftBoxX + leftBoxWidth + 10;
-            
-            for (let i = 0; i < numRightBoxes; i++) {
-                const rightBoxY = startYright + (i * (boxHeight + spacing));
-                const rightBoxCenterY = rightBoxY + boxHeight / 2;
-                const controlX1 = activeBoxRightX + curvature;
-                const controlX2 = rightBoxX - curvature;
+                // Get curvature from config
+                const curvature = config.curvature;
                 
-                // Modified this line to stop at rightBoxX rather than going into the box
-                paths += `<path d="M ${activeBoxRightX} ${activeBoxCenterY} C ${controlX1} ${activeBoxCenterY}, ${controlX2} ${rightBoxCenterY}, ${rightBoxX} ${rightBoxCenterY}" stroke="rgba(255, 255, 255, 1)" stroke-width="2" fill="none"/>`;
-                }
-            
-            svgLines.innerHTML = paths;
-        }
+                // Left lines
+                for (let i = 0; i < numLeftBoxes; i++) {
+                    const boxY = startYleft + (i * (boxHeight + spacing));
+                    const boxCenterY = boxY + boxHeight / 2;
+                    const controlX1 = convergencePointX + curvature;
+                    const controlX2 = leftBoxX - curvature;
+                    
+                    paths += `<path d="M ${convergencePointX} ${convergenceY} C ${controlX1} ${convergenceY}, ${controlX2} ${boxCenterY}, ${leftBoxX} ${boxCenterY}" stroke="rgba(255, 255, 255, 1)" stroke-width="2" fill="none"/>`;
+                    }
+                
+                // Right lines
+                const activeBoxY = startYleft + (activeLeftBox * (boxHeight + spacing));
+                const activeBoxCenterY = activeBoxY + boxHeight / 2;
+                const activeBoxRightX = leftBoxX + leftBoxWidth + 10;
+                
+                for (let i = 0; i < numRightBoxes; i++) {
+                    const rightBoxY = startYright + (i * (boxHeight + spacing));
+                    const rightBoxCenterY = rightBoxY + boxHeight / 2;
+                    const controlX1 = activeBoxRightX + curvature;
+                    const controlX2 = rightBoxX - curvature;
+                    
+                    // Modified this line to stop at rightBoxX rather than going into the box
+                    paths += `<path d="M ${activeBoxRightX} ${activeBoxCenterY} C ${controlX1} ${activeBoxCenterY}, ${controlX2} ${rightBoxCenterY}, ${rightBoxX} ${rightBoxCenterY}" stroke="rgba(255, 255, 255, 1)" stroke-width="2" fill="none"/>`;
+                    }
+                
+                svgLines.innerHTML = paths;
+            }
 
-        // ========================================
-        // ANIMATION
-        // ========================================
-        function animate() {
-            if (!animating) return;
-            
-            let diff = targetRotation - rotationOffset;
-            while (diff > 180) diff -= 360;
-            while (diff < -180) diff += 360;
-            
-            if (Math.abs(diff) < 0.5) {
-                rotationOffset = targetRotation;
-                animating = false;
+            // ========================================
+            // ANIMATION
+            // ========================================
+            function animate() {
+                if (!animating) return;
+                
+                let diff = targetRotation - rotationOffset;
+                while (diff > 180) diff -= 360;
+                while (diff < -180) diff += 360;
+                
+                if (Math.abs(diff) < 0.5) {
+                    rotationOffset = targetRotation;
+                    animating = false;
+                    updateNotePositions();
+                    return;
+                }
+                
+                rotationOffset += diff * animationSpeed;
+                while (rotationOffset >= 360) rotationOffset -= 360;
+                while (rotationOffset < 0) rotationOffset += 360;
+                
                 updateNotePositions();
-                return;
+                requestAnimationFrame(animate);
             }
-            
-            rotationOffset += diff * animationSpeed;
-            while (rotationOffset >= 360) rotationOffset -= 360;
-            while (rotationOffset < 0) rotationOffset += 360;
-            
-            updateNotePositions();
-            requestAnimationFrame(animate);
-        }
 
-        // ========================================
-        // INITIALIZATION
-        // ========================================
-        createBoxes();
-        calculatedoms(activeNote);
-        dom7labels(dom1, dom2, dom3, dom4);
-        calculateresolutions(activeLeftBox);
-        resolutionlabels(res1, res2, res3, res4, res5, res6);
-        updateLeftBoxes();
-        updateRightBoxes();
-        updateNotePositions();
-        updateActiveStates();
-        updateCenterText();
-        drawLines();
-
-        // ========================================
-        // DROPDOWN MODE SWITCHING
-        // ========================================
-        const dropdown = document.getElementById('dropdown');
-        dropdown.addEventListener('change', (e) => {
-            const selectedIndex = parseInt(e.target.value);
-            dropdownMode = selectedIndex;
-            
-            const config = MODE_CONFIG[dropdownMode];
-            
-            // Update UI labels
-            document.getElementById('left-label').textContent = config.leftLabel;
-            document.getElementById('right-label').textContent = config.rightLabel;
-            document.getElementById('arrow').innerHTML = config.arrowSVG;
-            centerTextElement.textContent = config.centerText;
-            
-            // Update box counts from config
-            numLeftBoxes = config.numLeftBoxes;
-            numRightBoxes = config.numRightBoxes;
-            
-            // Reset active box to 0
-            activeLeftBox = 0;
-            
-            // Recreate boxes with new configuration
+            // ========================================
+            // INITIALIZATION
+            // ========================================
             createBoxes();
-            switch (dropdownMode) {
-                case 0:
-                    calculatedoms(activeNote);
-                    dom7labels(dom1, dom2, dom3, dom4);
-                    calculateresolutions(activeLeftBox);
-                    resolutionlabels(res1, res2, res3, res4, res5, res6);
-                    break;
-                case 1:
-                    calculatepivots(activeNote);
-                    resolutionlabels(piv1, piv2, piv3, piv4, piv5, piv6);
-                    calculatedims(activeLeftBox);
-                    dim7labels(dim1, dim2, dim3, dim4);
-                    break;
-            }
+            calculatedoms(activeNote);
+            dom7labels(dom1, dom2, dom3, dom4);
+            calculateresolutions(activeLeftBox);
+            resolutionlabels(res1, res2, res3, res4, res5, res6);
             updateLeftBoxes();
             updateRightBoxes();
+            updateNotePositions();
             updateActiveStates();
+            updateCenterText();
             drawLines();
-        });
-    </script>
-</body>
+
+            // ========================================
+            // DROPDOWN MODE SWITCHING
+            // ========================================
+            const dropdown = document.getElementById('dropdown');
+            dropdown.addEventListener('change', (e) => {
+                const selectedIndex = parseInt(e.target.value);
+                dropdownMode = selectedIndex;
+                
+                const config = MODE_CONFIG[dropdownMode];
+                
+                // Update UI labels
+                document.getElementById('left-label').textContent = config.leftLabel;
+                document.getElementById('right-label').textContent = config.rightLabel;
+                document.getElementById('arrow').innerHTML = config.arrowSVG;
+                centerTextElement.textContent = config.centerText;
+                
+                // Update box counts from config
+                numLeftBoxes = config.numLeftBoxes;
+                numRightBoxes = config.numRightBoxes;
+                
+                // Reset active box to 0
+                activeLeftBox = 0;
+                
+                // Recreate boxes with new configuration
+                createBoxes();
+                switch (dropdownMode) {
+                    case 0:
+                        calculatedoms(activeNote);
+                        dom7labels(dom1, dom2, dom3, dom4);
+                        calculateresolutions(activeLeftBox);
+                        resolutionlabels(res1, res2, res3, res4, res5, res6);
+                        break;
+                    case 1:
+                        calculatepivots(activeNote);
+                        resolutionlabels(piv1, piv2, piv3, piv4, piv5, piv6);
+                        calculatedims(activeLeftBox);
+                        dim7labels(dim1, dim2, dim3, dim4);
+                        break;
+                }
+                updateLeftBoxes();
+                updateRightBoxes();
+                updateActiveStates();
+                drawLines();
+            });
+        </script>
+    </body>
+    <description>
+        <div id="dcontainer">
+            <div id="dtextcontainer">
+                <div id="dtext"><span style="white-space: pre-line; font-size: 14px;">Every diminished 7 chord can resolve to 4 unique dominant 7 chords by moving any chord tone down by a semitone.
+
+                This project aims to help visualise these resolution pathways by starting from a diminished 7, or working backwards from a resolution key. Use the dropdown menu to switch between these modes. 
+
+                The six most common jazz cadences are displayed, opening potential modulations to and from any key, but these pathways are non exhaustive, so please explore your own modal and non-tonic resolutions :)</p></span></div>
+            </div>
+        </div>
+    </description>
+</whole>
 </html>

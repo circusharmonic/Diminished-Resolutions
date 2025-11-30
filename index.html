@@ -5,129 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diminished Resolutions</title>
     <style>
+        :root {
+            --scale-factor: 1;
+            --base-width: 720px;
+            --base-height: 500px;
+        }
+
         whole {
             margin: auto;
-            margin-top: -20px;
             height: auto;
-            padding: 20px;
+            padding: calc(0px * var(--scale-factor));
             background: transparent;
-            display: inline;
+            display: block;
             min-height: 10vh;
         }
+
         description {
             margin: auto;
             background: #1a1a1a;
-            display: inline;
-            margin-inline: 6px;
+            display: block;
+            align-items: center;
+            margin-top: calc(10px * var(--scale-factor));
             font-family: Helvetica, sans-serif;
         }
+
         #dcontainer {
-            max-width: 680px;
-            width: 100%;
+            width: calc(var(--base-width) * var(--scale-factor));
             height: auto;
+            top: calc(-10px * var(--scale-factor));
             background: #2a2a2a;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-radius: calc(10px * var(--scale-factor));
+            padding: calc(20px * var(--scale-factor));
+            box-shadow: 0 calc(4px * var(--scale-factor)) calc(20px * var(--scale-factor)) rgba(0,0,0,0.5);
             position: relative;
         }
-        #dtextcontainer{
-            margin: 12px;
-            margin-top: 4px;
-            margin-bottom: 6px;
-            border: 60px;
+
+        #dtextcontainer {
+            margin: calc(12px * var(--scale-factor));
+            margin-top: calc(4px * var(--scale-factor));
+            margin-bottom: calc(6px * var(--scale-factor));
             color: white;
             z-index: 10;
         }
+
         .dtext {
-            top: 32px;
+            top: calc(32px * var(--scale-factor));
             color: white;
         }
+
         body {
-            margin: auto;
-            padding: 20px;
+            margin: 0;
+            padding: calc(10px * var(--scale-factor));
             background: #1a1a1a;
             display: flex;
-            justify-content: left;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
             font-family: Helvetica, sans-serif;
+            overflow-x: hidden;
         }
+
         #container {
+            width: calc(var(--base-width) * var(--scale-factor));
+            height: calc(var(--base-height) * var(--scale-factor) - 50px * var(--scale-factor));
+            top: calc(-10px * var(--scale-factor));
             background: #2a2a2a;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-radius: calc(10px * var(--scale-factor));
+            padding: calc(20px * var(--scale-factor));
+            box-shadow: 0 calc(4px * var(--scale-factor)) calc(20px * var(--scale-factor)) rgba(0,0,0,0.5);
             position: relative;
         }
+
         #title-container {
             position: absolute;
-            top: 40px;
-            left: 30px;
+            top: calc(26px * var(--scale-factor));
+            left: calc(40px * var(--scale-factor));
             color: white;
             z-index: 10;
             font-family: Helvetica, sans-serif;
         }
+
         #main-title {
-            font-size: 34px;
+            font-size: calc(30px * var(--scale-factor));
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: calc(5px * var(--scale-factor));
         }
+
         #subtitle {
-            font-size: 22px;
+            font-size: calc(20px * var(--scale-factor));
             font-style: italic;
         }
+
         #dropdown-container {
             position: absolute;
-            left: 475px;
-            top: 24px;
-            margin-top: 20px;
-            margin-bottom: 10px;
+            right: calc(53px * var(--scale-factor));
+            top: calc(6px * var(--scale-factor));
+            margin-top: calc(20px * var(--scale-factor));
+            margin-bottom: calc(10px * var(--scale-factor));
             z-index: 10;
         }
+
         #dropdown {
             background: #1a1a1a80;
             color: #ffffff;
-            border: 2px solid #1a1a1a00;
-            border-radius: 8px;
-            width: 220px;
-            height: 36px;
-            padding: 8px 19px;
+            border: calc(2px * var(--scale-factor)) solid #1a1a1a00;
+            border-radius: calc(8px * var(--scale-factor));
+            width: calc(220px * var(--scale-factor));
+            height: calc(36px * var(--scale-factor));
+            padding: calc(8px * var(--scale-factor)) calc(19px * var(--scale-factor));
             font-family: Helvetica, sans-serif;
-            font-size: 14px;
+            font-size: calc(14px * var(--scale-factor));
             cursor: pointer;
             outline: none;
         }
+
         #main-content {
-            width: 680px;
-            height: 460px;
+            width: calc(var(--base-width) * var(--scale-factor));
+            height: calc(460px * var(--scale-factor));
             position: relative;
-            margin-top: 22px;
-            margin-bottom: 10px;
+            margin-top: calc(-6px * var(--scale-factor));
+            margin-bottom: calc(10px * var(--scale-factor));
         }
         
         /* Label text */
         #label-container {
-            position: absolute;
-            left: 0;
-            top: 430px;
-            width: 680px;
-            height: 60px;
+            position: relative;
+            justify-content: center;
+            top: calc(430px * var(--scale-factor));
+            width: calc(680px * var(--scale-factor));
+            height: calc(60px * var(--scale-factor));
         }
         
         .label-text {
             position: absolute;
-            font-size: 22px;
+            font-size: calc(20px * var(--scale-factor));
             color: white;
         }
         
         #left-label {
-            left: 120px;
+            left: calc(120px * var(--scale-factor));
             transform: translateX(-50%);
         }
         
         #right-label {
-            left: 565px;
+            left: calc(565px * var(--scale-factor));
             transform: translateX(-50%);
         }
         
@@ -135,39 +156,39 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 36px;
+            font-size: calc(36px * var(--scale-factor));
             color: white;
-            width: 180px;
-            height: 36px;
+            width: calc(180px * var(--scale-factor));
+            height: calc(36px * var(--scale-factor));
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
         .arrow svg {
-            width: 100%;
-            height: 100%;
+            width: 90%;
+            height: 90%;
         }
         
         /* Circle of Fifths */
         #circle-container {
             position: absolute;
-            left: 0;
-            top: 40px;
-            width: 240px;
-            height: 400px;
+            left: calc(20px * var(--scale-factor));
+            top: calc(40px * var(--scale-factor));
+            width: calc(240px * var(--scale-factor));
+            height: calc(400px * var(--scale-factor));
         }
         
         .note-circle {
             position: absolute;
-            width: 44px;
-            height: 44px;
+            width: calc(44px * var(--scale-factor));
+            height: calc(44px * var(--scale-factor));
             border-radius: 50%;
             background: rgba(26, 26, 26, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: calc(16px * var(--scale-factor));
             color: white;
             cursor: pointer;
             transform: translate(-50%, -50%);
@@ -176,14 +197,14 @@
         
         .note-circle.active.red {
             background: rgba(255, 61, 64, 1);
-            width: 46.64px;
-            height: 46.64px;
+            width: calc(46.64px * var(--scale-factor));
+            height: calc(46.64px * var(--scale-factor));
         }
         
         .note-circle.active.green {
             background: rgba(51, 230, 107, 1);
-            width: 46.64px;
-            height: 46.64px;
+            width: calc(46.64px * var(--scale-factor));
+            height: calc(46.64px * var(--scale-factor));
         }
         
         #center-text {
@@ -191,7 +212,7 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            font-size: 16px;
+            font-size: calc(16px * var(--scale-factor));
             color: white;
             text-align: center;
         }
@@ -199,10 +220,10 @@
         /* Chart */
         #chart-container {
             position: absolute;
-            left: 250px;
-            top: 40px;
-            width: 430px;
-            height: 400px;
+            right: calc(28px * var(--scale-factor));
+            top: calc(40px * var(--scale-factor));
+            width: calc(430px * var(--scale-factor));
+            height: calc(400px * var(--scale-factor));
         }
         
         #svg-lines {
@@ -216,24 +237,24 @@
         
         .left-box {
             position: absolute;
-            height: 36px;
-            border-radius: 8px;
+            height: calc(36px * var(--scale-factor));
+            border-radius: calc(8px * var(--scale-factor));
             background: rgba(255, 119, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: calc(14px * var(--scale-factor));
             color: white;
             cursor: pointer;
             transition: background 0.15s ease, width 0.15s ease;
         }
         
         .left-box.narrow {
-            width: 80px;
+            width: calc(80px * var(--scale-factor));
         }
         
         .left-box.wide {
-            width: 226px;
+            width: calc(226px * var(--scale-factor));
         }
         
         .left-box.active {
@@ -242,22 +263,22 @@
         
         .right-box {
             position: absolute;
-            height: 36px;
-            border-radius: 8px;
+            height: calc(36px * var(--scale-factor));
+            border-radius: calc(8px * var(--scale-factor));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: calc(14px * var(--scale-factor));
             color: white;
             transition: background 0.15s ease, width 0.15s ease;
         }
         
         .right-box.narrow {
-            width: 80px;
+            width: calc(80px * var(--scale-factor));
         }
         
         .right-box.wide {
-            width: 220px;
+            width: calc(220px * var(--scale-factor));
         }
         
         .right-box.green {
@@ -301,8 +322,65 @@
                 </div>
             </div>
         </div>
+        <description>
+            <div id="dcontainer">
+                <div id="dtextcontainer">
+                    <div id="dtext"><span style="white-space: pre-line; font-size: calc(12px * var(--scale-factor));">Every diminished 7 chord can resolve to 4 unique dominant 7 chords by moving any chord tone down by a semitone.
+
+                    This project aims to help visualise these resolution pathways by starting from a diminished 7, or working backwards from a resolution key. Use the dropdown menu to switch between these modes, and click around the circle of fifths and chord suggestions to set your desired pathway.
+
+                    The six most common jazz cadences are displayed, opening potential modulations to and from any key, but these pathways are non exhaustive, so please explore your own modal and non-tonic resolutions :)</span></div>
+                </div>
+            </div>
+        </description>
 
         <script>
+            // Function to calculate and set the scale factor based on viewport size
+            function updateScaleFactor() {
+                const baseWidth = 720;
+                const baseHeight = 500;
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                
+                // Calculate scale factors for width and height
+                const widthScale = (viewportWidth - 40) / baseWidth;  // 40px for margins
+                const heightScale = (viewportHeight - 40) / (baseHeight + 160); // Add height for description
+                
+                // Use the smaller scale factor to ensure everything fits
+                let scaleFactor = Math.min(widthScale, heightScale, 1.5); // Cap at 1.5x
+                
+                // Set a minimum scale to prevent too small rendering
+                scaleFactor = Math.max(scaleFactor, 0.5);
+                
+                // Update the CSS variable
+                document.documentElement.style.setProperty('--scale-factor', scaleFactor);
+                
+                // Update JavaScript variables that depend on scale
+                centerX = 120 * scaleFactor;
+                centerY = 200 * scaleFactor;
+                outerRadius = 93.6 * scaleFactor;
+                boxHeight = 36 * scaleFactor;
+                spacing = 20 * scaleFactor;
+                
+                // Update configuration objects
+                MODE_CONFIG[0].leftBoxWidth = 80 * scaleFactor;
+                MODE_CONFIG[0].rightBoxWidth = 220 * scaleFactor;
+                MODE_CONFIG[0].leftBoxX = 45 * scaleFactor;
+                MODE_CONFIG[0].curvature = 26 * scaleFactor;
+                
+                MODE_CONFIG[1].leftBoxWidth = 220 * scaleFactor;
+                MODE_CONFIG[1].rightBoxWidth = 80 * scaleFactor;
+                MODE_CONFIG[1].leftBoxX = 65 * scaleFactor;
+                MODE_CONFIG[1].curvature = 20 * scaleFactor;
+                
+                // Refresh the UI with new scaling
+                if (initialized) {
+                    createBoxes();
+                    updateNotePositions();
+                    drawLines();
+                }
+            }
+
             // ========================================
             // MODE CONFIGURATIONS
             // ========================================
@@ -362,6 +440,7 @@
             const animationSpeed = 0.12;
             let activeLeftBox = 0;
             let dropdownMode = 0; // 0 = Diminished->Resolution, 1 = Resolution->Diminished
+            let initialized = false;
 
             // Box quantity variables
             let numLeftBoxes = 4;
@@ -371,18 +450,18 @@
             const chartContainer = document.getElementById('chart-container');
             const svgLines = document.getElementById('svg-lines');
 
-            const centerX = 120;
-            const centerY = 200;
-            const outerRadius = 93.6;
-            const boxHeight = 36;
-            const spacing = 20;
+            // These values will be updated by updateScaleFactor()
+            let centerX = 120;
+            let centerY = 200;
+            let outerRadius = 93.6;
+            let boxHeight = 36;
+            let spacing = 20;
             
             let centerText = '°7 Pivot Chord';
             const centerTextElement = document.getElementById('center-text');
             // ========================================
             // BOX DATA
             // ========================================
-
 
             let domlist = [
                 { label: "B7" },
@@ -465,6 +544,7 @@
             
             function createBoxes() {
                 const config = MODE_CONFIG[dropdownMode];
+                const scaleFactor = parseFloat(document.documentElement.style.getPropertyValue('--scale-factor') || 1);
                 
                 // Clear existing boxes
                 leftBoxElements.forEach(el => el.remove());
@@ -473,7 +553,7 @@
                 rightBoxElements = [];
                 
                 const totalHeightleft = (numLeftBoxes * boxHeight) + ((numLeftBoxes - 1) * spacing);
-                const startYleft = (400 - totalHeightleft) / 2;
+                const startYleft = (400 * scaleFactor - totalHeightleft) / 2;
                 const leftBoxX = config.leftBoxX;
                 
                 // Create left boxes
@@ -513,9 +593,9 @@
                 
                 // Create right boxes - always aligned with circle center
                 const totalHeightright = (numRightBoxes * boxHeight) + ((numRightBoxes - 1) * spacing);
-                const startYright = (400 - totalHeightright) / 2;
+                const startYright = (400 * scaleFactor - totalHeightright) / 2;
                 // Adjust rightBoxX to extend left when narrow
-                const rightBoxX = dropdownMode === 0 ? leftBoxX + config.leftBoxWidth + 80 : leftBoxX + config.leftBoxWidth + 100 - 40;
+                const rightBoxX = dropdownMode === 0 ? leftBoxX + config.leftBoxWidth + 80 * scaleFactor : leftBoxX + config.leftBoxWidth + (100 - 40) * scaleFactor;
                 
                 for (let i = 0; i < numRightBoxes; i++) {
                     const el = document.createElement('div');
@@ -642,6 +722,7 @@
             }
 
             function updateNotePositions() {
+                const scaleFactor = parseFloat(document.documentElement.style.getPropertyValue('--scale-factor') || 1);
                 noteElements.forEach((el, i) => {
                     const angle = (i * 30 - rotationOffset) * Math.PI / 180;
                     const x = centerX + Math.cos(angle) * outerRadius;
@@ -681,7 +762,7 @@
                     case 1:
                         leftBoxes = dompivotlist;
                         break;
-                    }
+                }
                 leftBoxElements.forEach((el, i) => {
                     el.textContent = leftBoxes[i] ? leftBoxes[i].label : '';
                 });
@@ -695,28 +776,29 @@
                     case 1:
                         rightBoxes = dimlist;
                         break;
-                    }
+                }
                 rightBoxElements.forEach((el, i) => {
                     el.textContent = rightBoxes[i] ? rightBoxes[i].label : '';
                 });
             }
-            
+
             function drawLines() {
                 const config = MODE_CONFIG[dropdownMode];
-                const convergencePointX = 5;
-                const convergenceY = 200;
+                const convergencePointX = 5 * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale-factor'));
+                const convergenceY = 200 * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale-factor'));
               
                 let paths = '';
-            
+
                 const totalHeightleft = (numLeftBoxes * boxHeight) + ((numLeftBoxes - 1) * spacing);
-                const startYleft = (400 - totalHeightleft) / 2;
+                const startYleft = (400 * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale-factor')) - totalHeightleft) / 2;
                 const leftBoxX = config.leftBoxX;
-            
+
                 const leftBoxWidth = config.leftBoxWidth;
-                const rightBoxX = dropdownMode === 0 ? leftBoxX + leftBoxWidth + 80 : leftBoxX + leftBoxWidth + 100 - 40;
-            
+                const rightBoxX = dropdownMode === 0 ? leftBoxX + leftBoxWidth + 80 * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale-factor')) : 
+                                                     leftBoxX + leftBoxWidth + (100 - 40) * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale-factor'));
+
                 const totalHeightright = (numRightBoxes * boxHeight) + ((numRightBoxes - 1) * spacing);
-                const startYright = (400 - totalHeightright) / 2;
+                const startYright = (400 * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale-factor')) - totalHeightright) / 2;
                 
                 // Get curvature from config
                 const curvature = config.curvature;
@@ -728,13 +810,13 @@
                     const controlX1 = convergencePointX + curvature;
                     const controlX2 = leftBoxX - curvature;
                     
-                    paths += `<path d="M ${convergencePointX} ${convergenceY} C ${controlX1} ${convergenceY}, ${controlX2} ${boxCenterY}, ${leftBoxX} ${boxCenterY}" stroke="rgba(255, 255, 255, 1)" stroke-width="2" fill="none"/>`;
-                    }
+                    paths += `<path d="M ${convergencePointX} ${convergenceY} C ${controlX1} ${convergenceY}, ${controlX2} ${boxCenterY}, ${leftBoxX} ${boxCenterY}" stroke="rgba(255, 255, 255, 1)" stroke-width="${2 * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale-factor'))}" fill="none"/>`;
+                }
                 
                 // Right lines
                 const activeBoxY = startYleft + (activeLeftBox * (boxHeight + spacing));
                 const activeBoxCenterY = activeBoxY + boxHeight / 2;
-                const activeBoxRightX = leftBoxX + leftBoxWidth + 10;
+                const activeBoxRightX = leftBoxX + leftBoxWidth + 10 * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale-factor'));
                 
                 for (let i = 0; i < numRightBoxes; i++) {
                     const rightBoxY = startYright + (i * (boxHeight + spacing));
@@ -743,8 +825,8 @@
                     const controlX2 = rightBoxX - curvature;
                     
                     // Modified this line to stop at rightBoxX rather than going into the box
-                    paths += `<path d="M ${activeBoxRightX} ${activeBoxCenterY} C ${controlX1} ${activeBoxCenterY}, ${controlX2} ${rightBoxCenterY}, ${rightBoxX} ${rightBoxCenterY}" stroke="rgba(255, 255, 255, 1)" stroke-width="2" fill="none"/>`;
-                    }
+                    paths += `<path d="M ${activeBoxRightX} ${activeBoxCenterY} C ${controlX1} ${activeBoxCenterY}, ${controlX2} ${rightBoxCenterY}, ${rightBoxX} ${rightBoxCenterY}" stroke="rgba(255, 255, 255, 1)" stroke-width="${2 * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale-factor'))}" fill="none"/>`;
+                }
                 
                 svgLines.innerHTML = paths;
             }
@@ -777,74 +859,78 @@
             // ========================================
             // INITIALIZATION
             // ========================================
-            createBoxes();
-            calculatedoms(activeNote);
-            dom7labels(dom1, dom2, dom3, dom4);
-            calculateresolutions(activeLeftBox);
-            resolutionlabels(res1, res2, res3, res4, res5, res6);
-            updateLeftBoxes();
-            updateRightBoxes();
-            updateNotePositions();
-            updateActiveStates();
-            updateCenterText();
-            drawLines();
+            function init() {
+                // Set initial scale
+                updateScaleFactor();
+                
+                createBoxes();
+                calculatedoms(activeNote);
+                dom7labels(dom1, dom2, dom3, dom4);
+                calculateresolutions(activeLeftBox);
+                resolutionlabels(res1, res2, res3, res4, res5, res6);
+                updateLeftBoxes();
+                updateRightBoxes();
+                updateNotePositions();
+                updateActiveStates();
+                updateCenterText();
+                drawLines();
+                
+                initialized = true;
+            }
 
             // ========================================
             // DROPDOWN MODE SWITCHING
             // ========================================
             const dropdown = document.getElementById('dropdown');
             dropdown.addEventListener('change', (e) => {
-                const selectedIndex = parseInt(e.target.value);
-                dropdownMode = selectedIndex;
-                
-                const config = MODE_CONFIG[dropdownMode];
-                
-                // Update UI labels
-                document.getElementById('left-label').textContent = config.leftLabel;
-                document.getElementById('right-label').textContent = config.rightLabel;
-                document.getElementById('arrow').innerHTML = config.arrowSVG;
-                centerTextElement.textContent = config.centerText;
-                
-                // Update box counts from config
-                numLeftBoxes = config.numLeftBoxes;
-                numRightBoxes = config.numRightBoxes;
-                
-                // Reset active box to 0
-                activeLeftBox = 0;
-                
-                // Recreate boxes with new configuration
-                createBoxes();
-                switch (dropdownMode) {
-                    case 0:
-                        calculatedoms(activeNote);
-                        dom7labels(dom1, dom2, dom3, dom4);
-                        calculateresolutions(activeLeftBox);
-                        resolutionlabels(res1, res2, res3, res4, res5, res6);
-                        break;
-                    case 1:
-                        calculatepivots(activeNote);
-                        resolutionlabels(piv1, piv2, piv3, piv4, piv5, piv6);
-                        calculatedims(activeLeftBox);
-                        dim7labels(dim1, dim2, dim3, dim4);
-                        break;
-                }
-                updateLeftBoxes();
-                updateRightBoxes();
-                updateActiveStates();
-                drawLines();
+            const selectedIndex = parseInt(e.target.value);
+            dropdownMode = selectedIndex;
+            
+            const config = MODE_CONFIG[dropdownMode];
+            
+            // Update UI labels
+            document.getElementById('left-label').textContent = config.leftLabel;
+            document.getElementById('right-label').textContent = config.rightLabel;
+            document.getElementById('arrow').innerHTML = config.arrowSVG;
+            centerTextElement.textContent = config.centerText;
+            
+            // Update box counts from config
+            numLeftBoxes = config.numLeftBoxes;
+            numRightBoxes = config.numRightBoxes;
+            
+            // Reset active box to 0
+            activeLeftBox = 0;
+            
+            // Recreate boxes with new configuration
+            createBoxes();
+            switch (dropdownMode) {
+                case 0:
+                    calculatedoms(activeNote);
+                    dom7labels(dom1, dom2, dom3, dom4);
+                    calculateresolutions(activeLeftBox);
+                    resolutionlabels(res1, res2, res3, res4, res5, res6);
+                    break;
+                case 1:
+                    calculatepivots(activeNote);
+                    resolutionlabels(piv1, piv2, piv3, piv4, piv5, piv6);
+                    calculatedims(activeLeftBox);
+                    dim7labels(dim1, dim2, dim3, dim4);
+                    break;
+            }
+            updateLeftBoxes();
+            updateRightBoxes();
+            updateActiveStates();
+            drawLines();
             });
+
+            // ========================================
+            // WINDOW RESIZE HANDLING
+            // ========================================
+            window.addEventListener('resize', updateScaleFactor);
+
+            // Initialize after DOM is fully loaded
+            document.addEventListener('DOMContentLoaded', init);
         </script>
     </body>
-    <description>
-        <div id="dcontainer">
-            <div id="dtextcontainer">
-                <div id="dtext"><span style="white-space: pre-line; font-size: 14px;">Every diminished 7 chord can resolve to 4 unique dominant 7 chords by moving any chord tone down by a semitone.
-
-                This project aims to help visualise these resolution pathways by starting from a diminished 7, or working backwards from a resolution key. Use the dropdown menu to switch between these modes, and click around the circle of fifths and chord suggestions to set your desired pathway.
-
-                The six most common jazz cadences are displayed, opening potential modulations to and from any key, but these pathways are non exhaustive, so please explore your own modal and non-tonic resolutions :)</p></span></div>
-            </div>
-        </div>
-    </description>
 </whole>
 </html>

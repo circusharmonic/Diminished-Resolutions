@@ -6,7 +6,7 @@
     <title>Diminished Resolutions</title>
     <style>
         :root {
-            --scale-factor: 0.8;
+            --scale-factor: 0.2;
             --base-width: 720px;
             --base-height: 500px;
         }
@@ -50,9 +50,9 @@
 
         #dtext span {
             white-space: pre-wrap;
-            width: calc(var(--base-width) * var(--scale-factor));
+            width: calc(var(--base-width) * var(--scale-factor) - (26px * var(--scale-factor)));
             display: block;
-            font-size: calc(10px * var(--scale-factor * 0.85));
+            font-size: calc(12.6px * var(--scale-factor));
         }
 
         body {

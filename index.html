@@ -48,9 +48,16 @@
             z-index: 10;
         }
 
-        .dtext {
+/*        .dtext {
             top: calc(32px * var(--scale-factor));
             color: white;
+        }*/
+
+        #dtextspan span {
+            white-space: pre-wrap;
+            width: calc(640px * var(--scale-factor));
+            display: block;
+            font-size: calc(10px * var(--scale-factor * 0.85));
         }
 
         body {
@@ -325,10 +332,10 @@
         <description>
             <div id="dcontainer">
                 <div id="dtextcontainer">
-                    <div id="dtext"><span style="white-space: pre-line; font-size: calc(12px * var(--scale-factor));">Every diminished 7 chord can resolve to 4 unique dominant 7 chords by moving any chord tone down by a semitone.
-
-                    This project aims to help visualise these resolution pathways by starting from a diminished 7, or working backwards from a resolution key. Use the dropdown menu to switch between these modes, and click around the circle of fifths and chord suggestions to set your desired pathway.
-
+                    <div id="dtext"><span style="font-size: calc(12px * var(--scale-factor));"><p>Every diminished 7 chord can resolve to 4 unique dominant 7 chords by moving any chord tone down by a semitone.</p>
+                    <p></p>
+                    <p>This project aims to help visualise these resolution pathways by starting from a diminished 7, or working backwards from a resolution key. Use the dropdown menu to switch between these modes, and click around the circle of fifths and chord suggestions to set your desired pathway.</p>
+                    <p></p>
                     The six most common jazz cadences are displayed, opening potential modulations to and from any key, but these pathways are non exhaustive, so please explore your own modal and non-tonic resolutions :)</span></div>
                 </div>
             </div>

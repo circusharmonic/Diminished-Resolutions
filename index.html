@@ -14,9 +14,13 @@
         whole {
             margin: auto;
             height: auto;
+            padding: calc(0px * var(--scale-factor));
             background: transparent;
             display: block;
-            min-height: 10vh;
+            min-height: 1vh;
+            zoom: 98%;
+            user-zoom: fixed;
+            flex-wrap: nowrap;
         }
 
         description {
@@ -35,14 +39,12 @@
             background: #2a2a2a;
             border-radius: calc(10px * var(--scale-factor));
             padding: calc(20px * var(--scale-factor));
-            margin-left: calc(0.01 * var(--base-width));
-            padding-left: calc(-0.01 * var(--base-width));
             box-shadow: 0 calc(4px * var(--scale-factor)) calc(20px * var(--scale-factor)) rgba(0,0,0,0.5);
             position: relative;
         }
 
         #dtextcontainer {
-            margin: calc(24px * var(--scale-factor));
+            margin: calc(12px * var(--scale-factor));
             margin-top: calc(4px * var(--scale-factor));
             margin-bottom: calc(6px * var(--scale-factor));
             color: white;
@@ -75,8 +77,6 @@
             background: #2a2a2a;
             border-radius: calc(10px * var(--scale-factor));
             padding: calc(20px * var(--scale-factor));
-            margin-left: calc(0.01 * var(--base-width));
-            padding-left: calc(-0.01 * var(--base-width));
             box-shadow: 0 calc(4px * var(--scale-factor)) calc(20px * var(--scale-factor)) rgba(0,0,0,0.5);
             position: relative;
         }
@@ -103,7 +103,7 @@
 
         #dropdown-container {
             position: absolute;
-            right: calc(53px * var(--scale-factor) - 0.01 * var(--base-width));
+            right: calc(53px * var(--scale-factor));
             top: calc(6px * var(--scale-factor));
             margin-top: calc(20px * var(--scale-factor));
             margin-bottom: calc(10px * var(--scale-factor));
@@ -128,7 +128,6 @@
             width: calc(var(--base-width) * var(--scale-factor));
             height: calc(460px * var(--scale-factor));
             position: relative;
-            margin-left: calc(0.01 * var(--base-width));
             margin-top: calc(-6px * var(--scale-factor));
             margin-bottom: calc(10px * var(--scale-factor));
         }

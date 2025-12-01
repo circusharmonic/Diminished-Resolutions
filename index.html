@@ -11,17 +11,36 @@
             --base-height: 500px;
         }
 
-        whole {
-            margin: auto;
-            height: auto;
-            padding: calc(0px * var(--scale-factor));
-            background: transparent;
-            display: block;
-            min-height: 1vh;
-            align-items: margin-top;
-            scale: 0.95;
+        @media only screen and (max-width: 767px) {
+            whole {
+                margin: auto;
+                height: auto;
+                padding: calc(0px * var(--scale-factor));
+                background: transparent;
+                display: block;
+                min-height: 1vh;
+                align-items: margin-top;
+                scale: 0.8;
+            }
+            .desktop-only {
+                display: none;
+            }
         }
 
+        @media only screen and (max-width: 768px) {
+            whole {
+                margin: auto;
+                height: auto;
+                padding: calc(0px * var(--scale-factor));
+                background: transparent;
+                display: block;
+                min-height: 1vh;
+                align-items: margin-top;
+            }
+            .mobile-only {
+                display: none;
+            }
+        }
         description {
             margin: auto;
             background: #1a1a1a;
@@ -34,7 +53,7 @@
         #dcontainer {
             width: calc(var(--base-width) * var(--scale-factor));
             height: auto;
-            top: calc(-10px * var(--scale-factor));
+            top: calc(-2px * var(--scale-factor));
             background: #2a2a2a;
             border-radius: calc(10px * var(--scale-factor));
             padding: calc(20px * var(--scale-factor));
@@ -60,6 +79,7 @@
 
         body {
             margin: 0;
+            top: 1000px;
             padding: calc(10px * var(--scale-factor));
             background: #1a1a1a;
             display: flex;
@@ -73,7 +93,7 @@
         #container {
             width: calc(var(--base-width) * var(--scale-factor));
             height: calc(var(--base-height) * var(--scale-factor) - 50px * var(--scale-factor));
-            top: calc(-10px * var(--scale-factor));
+            top: calc(-2px * var(--scale-factor));
             background: #2a2a2a;
             border-radius: calc(10px * var(--scale-factor));
             padding: calc(20px * var(--scale-factor));

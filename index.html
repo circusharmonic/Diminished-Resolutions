@@ -11,6 +11,15 @@
             --base-height: 500px;
         }
 
+        whole {
+            height: auto;
+            padding: calc(0px * var(--scale-factor));
+            background: transparent;
+            display: block;
+            min-height: 1vh;
+            align-items: margin-top;
+        }
+/*
         @media only screen and (max-width: 767px) {
             whole {
                 height: auto;
@@ -19,7 +28,6 @@
                 display: block;
                 min-height: 1vh;
                 align-items: margin-top;
-                scale: 0.86;
             }
             .desktop-only {
                 display: none;
@@ -38,7 +46,7 @@
             .mobile-only {
                 display: none;
             }
-        }
+        }*/
         description {
             margin: auto;
             background: #1a1a1a;
@@ -362,8 +370,8 @@
             function updateScaleFactor() {
                 const baseWidth = 720;
                 const baseHeight = 500;
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
+                const viewportWidth = ((window.innerWidth <= 767) ? window.innerWidth * 0.86 : window.innerWidth);
+                const viewportHeight = ((window.innerHeight <= 767) ? window.innerHeight * 0.86 : window.innerHeight);
                 
                 // Calculate scale factors for width and height
                 const widthScale = (viewportWidth - 40) / baseWidth;  // 40px for margins

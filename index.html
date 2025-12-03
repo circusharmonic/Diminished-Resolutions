@@ -957,20 +957,14 @@
             // ========================================
             // WINDOW RESIZE HANDLING
             // ========================================
-            // window.addEventListener('load', function() {
-            //     updateScaleFactor();
-            //     // Force a redraw after a tiny delay to ensure scaling is applied
-            //     setTimeout(function() {
-            //         updateScaleFactor();
-            //         if (initialized) {
-            //             createBoxes();
-            //             updateNotePositions();
-            //             drawLines();
-            //         }
-            //     }, 50);
-            // });
-
-            window.addEventListener('load', init);
+            window.addEventListener('load', function() {
+                updateScaleFactor();
+                // Force a redraw after a tiny delay to ensure scaling is applied
+                setTimeout(function() {
+                    updateScaleFactor();
+                    init();
+                }, 50);
+            });
 
             window.addEventListener('resize', function() {
                 updateScaleFactor();

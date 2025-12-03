@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Diminished Resolutions</title>
+    <style>
     <style>
         :root {
             --scale-factor: 1;
@@ -12,14 +13,13 @@
         }
 
         whole {
-            height: auto;
             padding: calc(0px * var(--scale-factor));
             background: transparent;
             display: block;
             min-height: 1vh;
             align-items: margin-top;
         }
-        
+
         description {
             margin: auto;
             background: #1a1a1a;
@@ -58,7 +58,6 @@
 
         body {
             margin: 0;
-            top: 1000px;
             padding: calc(10px * var(--scale-factor));
             background: #1a1a1a;
             display: flex;
@@ -67,6 +66,7 @@
             min-height: 100vh;
             font-family: Helvetica, sans-serif;
             overflow-x: hidden;
+            overflow-y: auto;
         }
 
         #container {
@@ -342,19 +342,22 @@
             // Function to calculate and set the scale factor based on viewport size
             function updateScaleFactor() {
                 const baseWidth = 720;
-                const baseHeight = 500;
-                const viewportWidth = ((window.innerWidth <= 767) ? window.innerWidth * 0.80 : window.innerWidth);
-                const viewportHeight = ((window.innerHeight <= 767) ? window.innerHeight * 0.80 : window.innerHeight);
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
                 
                 // Calculate scale factors for width and height
                 const widthScale = (viewportWidth - 40) / baseWidth;  // 40px for margins
-                const heightScale = (viewportHeight - 40) / (baseHeight + 160); // Add height for description
+                const heightScale = viewportHeight / 800; // Approximate total height
                 
                 // Use the smaller scale factor to ensure everything fits
                 let scaleFactor = Math.min(widthScale, heightScale, 1.5); // Cap at 1.5x
                 
-                // Set a minimum scale to prevent too small rendering
-                scaleFactor = Math.max(scaleFactor, 0.5);
+                // Set a minimum scale for mobile - this is the key change
+                if (viewportWidth <= 768) { // Mobile breakpoint
+                    scaleFactor = Math.max(scaleFactor, 0.35);
+                } else {
+                    scaleFactor = Math.max(scaleFactor, 0.5);
+                }
                 
                 // Update the CSS variable
                 document.documentElement.style.setProperty('--scale-factor', scaleFactor);

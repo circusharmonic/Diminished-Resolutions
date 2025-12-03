@@ -958,11 +958,15 @@
             // ========================================
             // WINDOW RESIZE HANDLING
             // ========================================
-            window.addEventListener('resize', updateScaleFactor);
-            updateScaleFactor();
+            window.addEventListener('load', function() {
+                updateScaleFactor();
+            });
 
             // Initialize after DOM is fully loaded
             document.addEventListener('DOMContentLoaded', init);
+
+            window.addEventListener('resize', updateScaleFactor);
+            
         </script>
     </body>
 </whole>

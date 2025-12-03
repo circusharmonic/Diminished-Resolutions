@@ -964,15 +964,7 @@
                     updateScaleFactor();
                     if (initialized) {
                         createBoxes();
-                        calculatedoms(activeNote);
-                        dom7labels(dom1, dom2, dom3, dom4);
-                        calculateresolutions(activeLeftBox);
-                        resolutionlabels(res1, res2, res3, res4, res5, res6);
-                        updateLeftBoxes();
-                        updateRightBoxes();
                         updateNotePositions();
-                        updateActiveStates();
-                        updateCenterText();
                         drawLines();
                     }
                 }, 50);

@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Diminished Resolutions</title>
-    <style>
     <style>
         :root {
             --scale-factor: 1;
@@ -119,10 +118,30 @@
             width: calc(220px * var(--scale-factor));
             height: calc(36px * var(--scale-factor));
             padding: calc(8px * var(--scale-factor)) calc(19px * var(--scale-factor));
+            padding-right: calc(30px * var(--scale-factor)); /* Increase right padding to make space for the arrow */
             font-family: Helvetica, sans-serif;
             font-size: calc(14px * var(--scale-factor));
             cursor: pointer;
             outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            position: relative; /* For arrow positioning */
+        }
+
+        #dropdown-arrow {
+            position: absolute;
+            top: 56%;
+            right: calc(10px * var(--scale-factor));
+            transform: translateY(-50%);
+            width: calc(10px * var(--scale-factor));
+            height: calc(6px * var(--scale-factor));
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 5 5-5z' fill='white'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            pointer-events: none;
+            /*z-index: 101;*/
         }
 
         #main-content {
@@ -308,6 +327,7 @@
                     <option value="0">Diminished → Resolution</option>
                     <option value="1">Resolution → Diminished</option>
                 </select>
+                <div id="dropdown-arrow"></div>
             </div>
             <div id="main-content">
                 <div id="circle-container">

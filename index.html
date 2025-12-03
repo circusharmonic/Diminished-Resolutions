@@ -362,7 +362,7 @@
 
             // Function to calculate and set the scale factor based on viewport size
             function updateScaleFactor() {
-                const baseWidth = 720;
+                const baseWidth = 760;
                 const viewportWidth = window.innerWidth;
                 const viewportHeight = window.innerHeight;
                 
@@ -374,7 +374,7 @@
                 let scaleFactor = Math.min(widthScale, heightScale, 1.5); // Cap at 1.5x
                 
                 // Set a minimum scale for mobile - adjust to a smaller value
-                if (viewportWidth <= 800) { // Mobile breakpoint
+                if (viewportWidth <= 768) { // Mobile breakpoint
                     scaleFactor = Math.max(scaleFactor, 0.2); // Changed from 0.3 to 0.2
                 } else {
                     scaleFactor = Math.max(scaleFactor, 0.3); // Reduced from 0.5

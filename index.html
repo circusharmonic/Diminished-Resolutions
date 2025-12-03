@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Diminished Resolutions</title>
     <style>
         :root {
@@ -362,7 +362,8 @@
 
             // Function to calculate and set the scale factor based on viewport size
             function updateScaleFactor() {
-                const baseWidth = 760;
+                document.body.style.webkitTransform = 'scale(1)';
+                const baseWidth = 720;
                 const viewportWidth = window.innerWidth;
                 const viewportHeight = window.innerHeight;
                 

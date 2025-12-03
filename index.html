@@ -954,6 +954,7 @@
             // WINDOW RESIZE HANDLING
             // ========================================
             window.addEventListener('resize', updateScaleFactor);
+            updateScaleFactor();
 
             // Initialize after DOM is fully loaded
             document.addEventListener('DOMContentLoaded', init);

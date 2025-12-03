@@ -364,24 +364,19 @@
                 const baseWidth = 720;
                 const viewportWidth = window.innerWidth;
                 const viewportHeight = window.innerHeight;
-                const widthScale = (viewportWidth - 30) / baseWidth;  // 60px for margins (increased from 40)
-                const heightScale = viewportHeight / 700; // Increase from 800 to account for all content
                 
                 // Calculate scale factors for width and height
-                // Set a minimum scale for mobile
-                if (viewportWidth <= 768) { // Mobile breakpoint
-                    widthScale = (viewportWidth - 90) / baseWidth;  // 60px for margins (increased from 40)
-                    heightScale = viewportHeight / 700; // Increase from 800 to account for all content
-                }
-
+                const widthScale = (viewportWidth - 60) / baseWidth;  // 60px for margins (increased from 40)
+                const heightScale = viewportHeight / 1000; // Increase from 800 to account for all content
+                
                 // Use the smaller scale factor to ensure everything fits
                 let scaleFactor = Math.min(widthScale, heightScale, 1.5); // Cap at 1.5x
                 
                 // Set a minimum scale for mobile - adjust to a smaller value
                 if (viewportWidth <= 768) { // Mobile breakpoint
-                    scaleFactor = Math.max(scaleFactor, 0.3); // Changed from 0.3 to 0.2
+                    scaleFactor = Math.max(scaleFactor, 0.2); // Changed from 0.3 to 0.2
                 } else {
-                    scaleFactor = Math.max(scaleFactor, 0.5); // Reduced from 0.5
+                    scaleFactor = Math.max(scaleFactor, 0.3); // Reduced from 0.5
                 }
                 
                 // Rest of the function remains the same...
@@ -958,15 +953,11 @@
             // ========================================
             // WINDOW RESIZE HANDLING
             // ========================================
-            window.addEventListener('load', function() {
-                updateScaleFactor();
-            });
+            window.addEventListener('resize', updateScaleFactor);
+            updateScaleFactor();
 
             // Initialize after DOM is fully loaded
             document.addEventListener('DOMContentLoaded', init);
-
-            window.addEventListener('resize', updateScaleFactor);
-            
         </script>
     </body>
 </whole>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Diminished Resolutions</title>
     <style>
         :root {
@@ -374,7 +374,7 @@
                 let scaleFactor = Math.min(widthScale, heightScale, 1.5); // Cap at 1.5x
                 
                 // Set a minimum scale for mobile - adjust to a smaller value
-                if (viewportWidth <= 768) { // Mobile breakpoint
+                if (viewportWidth <= 800) { // Mobile breakpoint
                     scaleFactor = Math.max(scaleFactor, 0.2); // Changed from 0.3 to 0.2
                 } else {
                     scaleFactor = Math.max(scaleFactor, 0.3); // Reduced from 0.5
@@ -953,7 +953,20 @@
 
             // ========================================
             // WINDOW RESIZE HANDLING
-            // ======================================== 
+            // ========================================
+            window.addEventListener('load', function() {
+                updateScaleFactor();
+                // Force a redraw after a tiny delay to ensure scaling is applied
+                setTimeout(function() {
+                    updateScaleFactor();
+                    if (initialized) {
+                        createBoxes();
+                        updateNotePositions();
+                        drawLines();
+                    }
+                }, 50);
+            });
+
             window.addEventListener('resize', function() {
                 updateScaleFactor();
             });

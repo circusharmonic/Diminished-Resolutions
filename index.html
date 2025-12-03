@@ -365,22 +365,23 @@
                 const viewportWidth = window.innerWidth;
                 const viewportHeight = window.innerHeight;
                 const widthScale = (viewportWidth - 30) / baseWidth;  // 60px for margins (increased from 40)
-                const heightScale = viewportHeight / 1000; // Increase from 800 to account for all content
+                const heightScale = viewportHeight / 700; // Increase from 800 to account for all content
                 
                 // Calculate scale factors for width and height
-                
+                // Set a minimum scale for mobile
+                if (viewportWidth <= 768) { // Mobile breakpoint
+                    widthScale = (viewportWidth - 90) / baseWidth;  // 60px for margins (increased from 40)
+                    heightScale = viewportHeight / 1000; // Increase from 800 to account for all content
+                }
+
                 // Use the smaller scale factor to ensure everything fits
                 let scaleFactor = Math.min(widthScale, heightScale, 1.5); // Cap at 1.5x
                 
                 // Set a minimum scale for mobile - adjust to a smaller value
                 if (viewportWidth <= 768) { // Mobile breakpoint
                     scaleFactor = Math.max(scaleFactor, 0.1); // Changed from 0.3 to 0.2
-                    heightScale = viewportHeight / 1000; // Increase from 800 to account for all content
-                    widthScale = (viewportWidth - 30) / baseWidth;  // 60px for margins (increased from 40)
                 } else {
                     scaleFactor = Math.max(scaleFactor, 0.3); // Reduced from 0.5
-                    heightScale = viewportHeight / 700; // Increase from 800 to account for all content
-                    widthScale = (viewportWidth - 90) / baseWidth;  // 60px for margins (increased from 40)
                 }
                 
                 // Rest of the function remains the same...

@@ -371,7 +371,7 @@
                 // Set a minimum scale for mobile
                 if (viewportWidth <= 768) { // Mobile breakpoint
                     widthScale = (viewportWidth - 90) / baseWidth;  // 60px for margins (increased from 40)
-                    heightScale = viewportHeight / 1000; // Increase from 800 to account for all content
+                    heightScale = viewportHeight / 700; // Increase from 800 to account for all content
                 }
 
                 // Use the smaller scale factor to ensure everything fits
@@ -379,7 +379,7 @@
                 
                 // Set a minimum scale for mobile - adjust to a smaller value
                 if (viewportWidth <= 768) { // Mobile breakpoint
-                    scaleFactor = Math.max(scaleFactor, 0.1); // Changed from 0.3 to 0.2
+                    scaleFactor = Math.max(scaleFactor, 0.2); // Changed from 0.3 to 0.2
                 } else {
                     scaleFactor = Math.max(scaleFactor, 0.3); // Reduced from 0.5
                 }

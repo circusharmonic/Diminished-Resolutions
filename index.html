@@ -366,7 +366,7 @@
                 const viewportHeight = window.innerHeight;
                 
                 // Calculate scale factors for width and height
-                const widthScale = (viewportWidth - 60) / baseWidth;
+                const widthScale = (viewportWidth - 60) / baseWidth;  // 60px for margins (increased from 40)
                 const heightScale = viewportHeight / 700; // Increase from 800 to account for all content
                 
                 // Use the smaller scale factor to ensure everything fits
@@ -374,7 +374,6 @@
                 
                 // Set a minimum scale for mobile - adjust to a smaller value
                 if (viewportWidth <= 768) { // Mobile breakpoint
-                    widthScale = (viewportWidth - 100) / baseWidth;
                     scaleFactor = Math.max(scaleFactor, 0.2); // Changed from 0.3 to 0.2
                 } else {
                     scaleFactor = Math.max(scaleFactor, 0.3); // Reduced from 0.5
@@ -954,8 +953,8 @@
             // ========================================
             // WINDOW RESIZE HANDLING
             // ========================================
+            window.addEventListener('load', updateScaleFactor);
             window.addEventListener('resize', updateScaleFactor);
-            updateScaleFactor();
 
             // Initialize after DOM is fully loaded
             document.addEventListener('DOMContentLoaded', init);

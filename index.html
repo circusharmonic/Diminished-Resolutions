@@ -363,6 +363,8 @@
             // Function to calculate and set the scale factor based on viewport size
             function updateScaleFactor() {
                 document.body.style.webkitTransform = 'scale(1)';
+                document.body.style.msTransform = 'scale(1)';
+                document.body.style.transform = 'scale(1)';
                 const baseWidth = 720;
                 const viewportWidth = window.innerWidth;
                 const viewportHeight = window.innerHeight;

@@ -15,7 +15,7 @@
             padding: calc(0px * var(--scale-factor));
             background: transparent;
             display: block;
-            min-height: 1vh;
+            min-height: 0;
             align-items: margin-top;
         }
 
@@ -62,7 +62,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
+            min-height: 0;
             font-family: Helvetica, sans-serif;
             overflow-x: hidden;
             overflow-y: auto;
@@ -366,20 +366,20 @@
                 const viewportHeight = window.innerHeight;
                 
                 // Calculate scale factors for width and height
-                const widthScale = (viewportWidth - 40) / baseWidth;  // 40px for margins
-                const heightScale = viewportHeight / 800; // Approximate total height
+                const widthScale = (viewportWidth - 60) / baseWidth;  // 60px for margins (increased from 40)
+                const heightScale = viewportHeight / 1000; // Increase from 800 to account for all content
                 
                 // Use the smaller scale factor to ensure everything fits
                 let scaleFactor = Math.min(widthScale, heightScale, 1.5); // Cap at 1.5x
                 
-                // Set a minimum scale for mobile - this is the key change
+                // Set a minimum scale for mobile - adjust to a smaller value
                 if (viewportWidth <= 768) { // Mobile breakpoint
-                    scaleFactor = Math.max(scaleFactor, 0.35);
+                    scaleFactor = Math.max(scaleFactor, 0.2); // Changed from 0.3 to 0.2
                 } else {
-                    scaleFactor = Math.max(scaleFactor, 0.5);
+                    scaleFactor = Math.max(scaleFactor, 0.3); // Reduced from 0.5
                 }
                 
-                // Update the CSS variable
+                // Rest of the function remains the same...
                 document.documentElement.style.setProperty('--scale-factor', scaleFactor);
                 
                 // Update JavaScript variables that depend on scale
